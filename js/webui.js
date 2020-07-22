@@ -732,20 +732,6 @@ function loadBodyPix() {
 }
 
 async function perform(net) {
-  while (blurBtn.hidden) {
-    const segmentation = await net.segmentPerson(selfvideo);
-
-    const backgroundBlurAmount = 6;
-    const edgeBlurAmount = 2;
-    const flipHorizontal = true;
-
-    bodyPix.drawBokehEffect(
-      canvas, selfvideo, segmentation, backgroundBlurAmount,
-      edgeBlurAmount, flipHorizontal);
-  }
-}
-
-async function perform(net) {
     while (blurBtn.hidden) {
         const segmentation = await net.segmentPerson(video);
 
