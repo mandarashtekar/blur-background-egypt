@@ -1,2 +1,3 @@
-# blur-background-egypt
-Blurring the Background by Bokeh effect or putting Virtual background as Sphinx/Himalayas
+# blur-background-selfvideo
+
+I am trying to blur the self view before sending it over to the opposite participant so the opposite participant can receive a blurred background video.
