@@ -1,6 +1,7 @@
 'use strict';
 
 var backgroundElement = document.querySelector('#background-container');
+var selected_background;
 
 window.onload = function () {
 	console.log("window.onload");
@@ -17,7 +18,7 @@ window.onload = function () {
     var bandwidth = data.bandwidth;
     var source = data.source;
     var pin = data.pin;
-    var selected_background = data.selected_background;
+    selected_background = data.selected_background;
 
     if(selected_background != 'bokeh'){
       var s = parse('url(./images/%s.jpg)', selected_background);
