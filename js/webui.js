@@ -753,19 +753,19 @@ async function perform(net) {
         const edgeBlurAmount = 2;
         const flipHorizontal = true;
 
-        // if (selected_background == 'bokeh') {
-          console.log("Inside IF");
+        if (selected_background == 'bokeh') {
+          console.log("Bokeh effect");
             bodyPix.drawBokehEffect(
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
-        // } else{
-            // drawBody(segmentation);
-        // }
+        } else{
+            drawBody(segmentation);
+        }
     }
 }
 
 function drawBody(personSegmentation) {
-    console.log("Inside drawBody");
+    console.log("Virtual Background effect");
     ctx.drawImage(videoElement, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
