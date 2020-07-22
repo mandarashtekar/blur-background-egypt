@@ -169,7 +169,7 @@ videoSelect.onchange = start;
 start();
 
 
-videoElement.onplaying = () => {
+selfvideo.onplaying = () => {
 	console.log("videoElement playing");
 
   canvas.width = selfvideo.videoWidth;
@@ -211,58 +211,6 @@ unblurBtn.addEventListener('click', e => {
 	videoElement.hidden = false;
 	canvas.hidden = true;
 });
-
-/*function loadBodyPix() {
-	var options = {
-	  multiplier: 0.75,
-	  stride: 32,
-	  quantBytes: 4
-	}
-	bodyPix.load(options)
-	  .then(net => perform(net))
-	  .catch(err => console.log(err))
-}
-
-async function perform(net) {
-	while (blurBtn.hidden) {
-	  const segmentation = await net.segmentPerson(video);
-
-	  const backgroundBlurAmount = 6;
-	  const edgeBlurAmount = 2;
-	  const flipHorizontal = true;
-
-    if (selected_background == 'bokeh') {
-      console.log("Inside IF");
-  	  bodyPix.drawBokehEffect(
-  	    canvas, selfvideo, segmentation, backgroundBlurAmount,
-  	    edgeBlurAmount, flipHorizontal);
-    } else{
-      console.log("Inside ELSE");
-      drawBody(segmentation);
-    }
-	}
-}
-
-function drawBody(personSegmentation) {
-    console.log("Inside drawBody");
-    ctx.drawImage(videoElement, 0, 0, selfvideo.width, selfvideo.height);
-    var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
-    var pixel = imageData.data;
-    for (var p = 0; p<pixel.length; p+=4)
-    {
-      if (personSegmentation.data[p/4] == 0) {
-          pixel[p+3] = 0;
-      }
-    }
-    ctx.imageSmoothingEnabled = true;
-    ctx.putImageData(imageData,0,0);
-}
-function parse(str) {
-    var args = [].slice.call(arguments, 1),
-        i = 0;
-
-    return str.replace(/%s/g, () => args[i++]);
-}*/
 
 /* -------------------- CallStats - START -------------------- */
 // callStats.addEventListener('click', e => {
