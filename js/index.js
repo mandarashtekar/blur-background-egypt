@@ -24,6 +24,7 @@ $('input:radio[name="role"]').change(function() {
     if ($(this).val() == '2') {
         console.log("Host Role selected");
         pinentry.classList.remove("hidden");
+        $("#id_pin").focus();
     } else {
         console.log("Guest Role selected");
         pinentry.classList.add("hidden");
