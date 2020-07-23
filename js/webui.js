@@ -722,6 +722,7 @@ function disconnect(){
 /* -------------------- Tensor Flow Blur Bck - START -------------------- */
 function loadBodyPix() {
   var options = {
+    architecture: 'MobileNetV1',
     multiplier: 1.0,
     stride: 8,
     quantBytes: 4
