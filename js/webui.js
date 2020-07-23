@@ -722,8 +722,8 @@ function disconnect(){
 /* -------------------- Tensor Flow Blur Bck - START -------------------- */
 function loadBodyPix() {
   var options = {
-    multiplier: 0.75,
-    stride: 32,
+    multiplier: 1.0,
+    stride: 8,
     quantBytes: 4
   }
   bodyPix.load(options)
@@ -735,7 +735,7 @@ async function perform(net) {
     while (blurBtn.hidden) {
         const segmentation = await net.segmentPerson(video);
 
-        const backgroundBlurAmount = 6;
+        const backgroundBlurAmount = 3;
         const edgeBlurAmount = 2;
         const flipHorizontal = true;
 
