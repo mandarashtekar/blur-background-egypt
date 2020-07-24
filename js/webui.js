@@ -403,34 +403,34 @@ function doneSetup(url, pin_status, conference_extension) {
 }
 
 function sipDialOut() {
-	console.log("SIP Dial Out");
+    console.log("SIP Dial Out");
 
     var phone_num = $("#phone_num").val();
     console.log("phone_num: " +phone_num);
     
-	if(isProvider == "true"){
-		$.ajax({
-	        type: "POST",
-	        url: VIDEO_VISITS.Path.grid.meeting.vendorDialOut,
-	        cache: false,
-	        async: true,
-	        data: phone_num,
-	        success: function(returndata){
-	            alert("success - work in progress");
-	        },
-	        error: function(){
-	            // display error message
-	            alert("error");
-	        }
-	    });
-	} else{
-		alert("coming soon...");
-	}
+    if(isProvider == "true"){
+        $.ajax({
+            type: "POST",
+            url: VIDEO_VISITS.Path.grid.meeting.vendorDialOut,
+            cache: false,
+            async: true,
+            data: phone_num,
+            success: function(returndata){
+                alert("success - work in progress");
+            },
+            error: function(){
+                // display error message
+                alert("error");
+            }
+        });
+    } else{
+        alert("coming soon...");
+    }
 }
 
 function participantCreated(participant){
-	console.log("inside participantCreated");
-	
+    console.log("inside participantCreated");
+    
     /*var participant_name = participant.display_name;
     console.log("Participant Name: " +participant.display_name);
 
@@ -443,7 +443,7 @@ function participantCreated(participant){
     } else{
         console.log("it's not a match!!! :(");
     }*/
-	
+    
     if(isProvider == "true"){
         // var patientFirstName = $("#patientDisplayName").val().split(/[ ,]+/);
         // var participantName = participant.display_name.split(/[ ,]+/);
@@ -636,14 +636,14 @@ function connected(url) {
 function switchDevices(){
     // rtc.user_media_stream = stream;
 
-	// rtc.video_source =  cameraID;
+    // rtc.video_source =  cameraID;
     // rtc.audio_source =  microPhoneID;
     
     // if(switchingDevice==1)
-    	// rtc.renegotiate(vmrInfoData.confNode, "meet.KNW_3344556611","rads", bandwidth);
+        // rtc.renegotiate(vmrInfoData.confNode, "meet.KNW_3344556611","rads", bandwidth);
     // rtc.renegotiate("Join+Conference");
     
-	rtc.renegotiate();
+    rtc.renegotiate();
 }
 
 function initialise(confnode, conf, userbw, username, userpin, req_source, flash_obj) {
@@ -714,7 +714,7 @@ function disconnect(){
         window.location.href =  '/videovisitproviderpexip/myMeetings.htm';
         window.location.href =  '/videovisit/myMeetings.htm';
     } else{
-    	window.location.href = '/videovisitmemberpexip/landingready.htm';
+        window.location.href = '/videovisitmemberpexip/landingready.htm';
         window.location.href = '/videovisit/landingready.htm';
     }*/
 }
