@@ -26,8 +26,8 @@ window.onload = function () {
     if(selected_background != 'bokeh'){
       s = parse('url(./images/%s.jpg)', selected_background);
       // canvas.style.backgroundImage=s;
-      backgroundElement.style.backgroundImage=s;
-      backgroundElement.style.width=canvas.width;
+      /*backgroundElement.style.backgroundImage=s;
+      backgroundElement.style.width=canvas.width;*/
 
       console.log("s: "+s);
     }
@@ -58,7 +58,7 @@ var configParams;*/
 /* -------------------- CallStats - END -------------------- */
 
 const videoElement = document.querySelector('video');
-// const selfvideo = document.querySelector('selfvideo');
+const selfvideo = document.getElementById('selfvideo');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -186,10 +186,10 @@ selfvideo.onplaying = () => {
 	console.log("videoElement playing");
   console.log("selfvideo.videoWidth: "+selfvideo.videoWidth+" selfvideo.videoHeight: "+selfvideo.videoHeight);
 
-  canvas.width = selfvideo.videoWidth;
-	canvas.height = selfvideo.videoHeight;
-  backgroundElement.width = selfvideo.videoWidth;
-  backgroundElement.height = selfvideo.videoHeight;
+  canvas3.width = selfvideo.videoWidth;
+	canvas3.height = selfvideo.videoHeight;
+  /*backgroundElement.width = selfvideo.videoWidth;
+  backgroundElement.height = selfvideo.videoHeight;*/
 };
 
 /*  function startVideoStream() {
@@ -212,7 +212,7 @@ blurBtn.addEventListener('click', e => {
 	unblurBtn.hidden = false;
 
 	// videoElement.hidden = true;
-	canvas.hidden = false;
+	// canvas.hidden = false;
 
 	loadBodyPix();
 });
@@ -295,10 +295,11 @@ function drawBody(personSegmentation) {
     image.src = "./images/sphinx.jpg";
     
     ctx2.drawImage(image, 0, 0, 200, 150);
-    ctx.drawImage(selfvideo, 0, 0, 200, 150);
-
     let frame2 =  ctx2.getImageData(0, 0, 200, 150);
+
+    ctx.drawImage(selfvideo, 0, 0, 200, 150);
     let frame = ctx.getImageData(0, 0, 200, 150);
+    
     let l = frame.data.length / 4;
 
     for (let i = 0; i < l; i++) {
