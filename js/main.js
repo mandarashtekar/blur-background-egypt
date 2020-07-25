@@ -2,6 +2,7 @@
 
 var backgroundElement = document.querySelector('#background-container');
 var selected_background;
+var isHost;
 
 window.onload = function () {
 	console.log("window.onload");
@@ -18,12 +19,14 @@ window.onload = function () {
     var bandwidth = data.bandwidth;
     var source = data.source;
     var pin = data.pin;
+    isHost = data.isHost;
     selected_background = data.selected_background;
 
     if(selected_background != 'bokeh'){
       var s = parse('url(./images/%s.jpg)', selected_background);
+      // canvas.style.backgroundImage=s;
       backgroundElement.style.backgroundImage=s;
-      backgroundElement.style.backgroundImage=selfvideo.width;
+      backgroundElement.style.width=canvas.width;
 
       console.log("s: "+s);
     }
@@ -33,6 +36,7 @@ window.onload = function () {
     console.log("Bandwidth:" +bandwidth);
     console.log("Source:" +source);
     console.log("Pin:" +pin);
+    console.log("isHost:" +isHost);
     console.log("selected_background: " +selected_background);
 
     initialise("vve-tpmg-lab.kp.org", alias, bandwidth, name, "", source);
@@ -53,8 +57,15 @@ var configParams;*/
 /* -------------------- CallStats - END -------------------- */
 
 const videoElement = document.querySelector('video');
+// const selfvideo = document.querySelector('selfvideo');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+
+const canvas2 = document.getElementById('canvas2');
+const ctx2 = canvas.getContext('2d');
+
+const canvas3 = document.getElementById('canvas3');
+const ctx3 = canvas.getContext('2d');
 
 const blurBtn = document.getElementById('blur-btn');
 const unblurBtn = document.getElementById('unblur-btn');
@@ -132,7 +143,7 @@ function changeAudioDestination() {
 function gotStream(stream) {
   window.stream = stream; // make stream available to console
   // videoElement.srcObject = stream;
-  // selfvideo.srcObject = stream;
+  selfvideo.srcObject = stream;
   // Refresh button list in case labels have become available
   return navigator.mediaDevices.enumerateDevices();
 }
@@ -172,6 +183,7 @@ start();
 
 selfvideo.onplaying = () => {
 	console.log("videoElement playing");
+  console.log("selfvideo.videoWidth: "+selfvideo.videoWidth+" selfvideo.videoHeight: "+selfvideo.videoHeight);
 
   canvas.width = selfvideo.videoWidth;
 	canvas.height = selfvideo.videoHeight;
@@ -212,6 +224,104 @@ unblurBtn.addEventListener('click', e => {
 	videoElement.hidden = false;
 	canvas.hidden = true;
 });
+
+
+/* -------------------- Tensor Flow Blur Bck - START -------------------- */
+function loadBodyPix() {
+    console.log("main - loadBodyPix");
+    var options = {
+        multiplier: 0.75,
+        stride: 32,
+        quantBytes: 4
+    }
+    bodyPix.load(options)
+        .then(net => perform(net))
+        .catch(err => console.log(err))
+}
+
+async function perform(net) {
+    while (blurBtn.hidden) {
+        const backgroundBlurAmount = 6;
+        const edgeBlurAmount = 2;
+        const flipHorizontal = true;
+        const segmentation = await net.segmentPerson(selfvideo);
+
+        if (selected_background == 'bokeh') {
+            console.log("Bokeh effect");
+
+            bodyPix.drawBokehEffect(
+              canvas, selfvideo, segmentation, backgroundBlurAmount,
+              edgeBlurAmount, flipHorizontal);
+        } else{
+            drawBody(segmentation);
+        }
+        /*else{
+            net.segmentPerson(selfvideo,  {
+                flipHorizontal: false,
+                internalResolution: 'medium',
+                segmentationThreshold: 0.5
+              })
+              .then(personSegmentation => {
+                if(personSegmentation!=null){
+                    drawBody(personSegmentation);
+                }
+            });
+            // cameraFrame = requestAnimFrame(detectBody);
+            // drawBody(segmentation);
+        }*/
+    }
+}
+
+function drawBody(personSegmentation) {
+    console.log("Virtual Background effect");
+    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
+    var pixel = imageData.data;
+    for (var p = 0; p<pixel.length; p+=4)
+    {
+      if (personSegmentation.data[p/4] == 0) {
+          pixel[p+3] = 0;
+      }
+    }
+    ctx.imageSmoothingEnabled = true;
+    ctx.putImageData(imageData,0,0);
+}
+/*function drawBody(personSegmentation) {
+    console.log("Virtual Background effect");
+    var image = new Image();
+    // image.setAttribute('crossOrigin', '');
+    // image.crossOrigin = "Anonymous";
+    image.src = "./images/sphinx.jpg";
+    
+    ctx2.drawImage(image, 0, 0, 200, 150);
+    ctx.drawImage(selfvideo, 0, 0, 200, 150);
+
+    let frame = ctx.getImageData(0, 0, 200, 150);
+    let l = frame.data.length / 4;
+
+    for (let i = 0; i < l; i++) {
+      let r = frame.data[i * 4 + 0];
+      let g = frame.data[i * 4 + 1];
+      let b = frame.data[i * 4 + 2];
+
+      if (g > 100 && r > 100 && b < 43){
+        frame.data[i * 4 + 0] = frame2.data[i * 4 + 0]
+        frame.data[i * 4 + 1] = frame2.data[i * 4 + 1]
+        frame.data[i * 4 + 2] = frame2.data[i * 4 + 2]
+      }
+    }
+    ctx3.putImageData(frame, 0, 0);
+}*/
+
+function parse(str) {
+    var args = [].slice.call(arguments, 1),
+        i = 0;
+
+    return str.replace(/%s/g, () => args[i++]);
+}
+/* -------------------- Tensor Flow Blur Bck - END -------------------- */
+
+
 
 /* -------------------- CallStats - START -------------------- */
 // callStats.addEventListener('click', e => {
