@@ -396,41 +396,38 @@ function doneSetup(url, pin_status, conference_extension) {
         }
     }
 
-    blurBtn.hidden = true;
-    loadBodyPix();
-
     rtc.connect(pin);
 }
 
 function sipDialOut() {
-    console.log("SIP Dial Out");
+	console.log("SIP Dial Out");
 
     var phone_num = $("#phone_num").val();
     console.log("phone_num: " +phone_num);
     
-    if(isProvider == "true"){
-        $.ajax({
-            type: "POST",
-            url: VIDEO_VISITS.Path.grid.meeting.vendorDialOut,
-            cache: false,
-            async: true,
-            data: phone_num,
-            success: function(returndata){
-                alert("success - work in progress");
-            },
-            error: function(){
-                // display error message
-                alert("error");
-            }
-        });
-    } else{
-        alert("coming soon...");
-    }
+	if(isProvider == "true"){
+		$.ajax({
+	        type: "POST",
+	        url: VIDEO_VISITS.Path.grid.meeting.vendorDialOut,
+	        cache: false,
+	        async: true,
+	        data: phone_num,
+	        success: function(returndata){
+	            alert("success - work in progress");
+	        },
+	        error: function(){
+	            // display error message
+	            alert("error");
+	        }
+	    });
+	} else{
+		alert("coming soon...");
+	}
 }
 
 function participantCreated(participant){
-    console.log("inside participantCreated");
-    
+	console.log("inside participantCreated");
+	
     /*var participant_name = participant.display_name;
     console.log("Participant Name: " +participant.display_name);
 
@@ -443,7 +440,7 @@ function participantCreated(participant){
     } else{
         console.log("it's not a match!!! :(");
     }*/
-    
+	
     if(isProvider == "true"){
         // var patientFirstName = $("#patientDisplayName").val().split(/[ ,]+/);
         // var participantName = participant.display_name.split(/[ ,]+/);
@@ -457,14 +454,14 @@ function participantCreated(participant){
         for (var i = 0; i < patientFirstName.length; i++) {
             for (var j = 0; j < participantName.length; j++) {
                 if (patientFirstName[i] === participantName[j]) {
-                    console.log("It's a match!!! :)");
+                    // console.log("It's a match!!! :)");
 
                     var uuid = participant.uuid;
-                    console.log("Participant uuid: " +participant.uuid);
+                    // console.log("Participant uuid: " +participant.uuid);
 
                     rtc.setParticipantSpotlight(uuid, true);
                 } else{
-                    console.log("It's not a match!!! :(");         
+                    // console.log("It's not a match!!! :(");         
                 }
             }
         }
@@ -482,14 +479,14 @@ function participantCreated(participant){
         for (var i = 0; i < providerFirstName.length; i++) {
             for (var j = 0; j < participantName.length; j++) {
                 if (providerFirstName[i] === participantName[j]) {
-                    console.log("It's a match!!! :)");
+                    // console.log("It's a match!!! :)");
 
                     var uuid = participant.uuid;
-                    console.log("Participant uuid: " +participant.uuid);
+                    // console.log("Participant uuid: " +participant.uuid);
 
                     rtc.setParticipantSpotlight(uuid, true);
                 } else{
-                    console.log("It's not a match!!! :(");         
+                    // console.log("It's not a match!!! :(");         
                 }
             }
         }
@@ -636,14 +633,14 @@ function connected(url) {
 function switchDevices(){
     // rtc.user_media_stream = stream;
 
-    // rtc.video_source =  cameraID;
+	// rtc.video_source =  cameraID;
     // rtc.audio_source =  microPhoneID;
     
     // if(switchingDevice==1)
-        // rtc.renegotiate(vmrInfoData.confNode, "meet.KNW_3344556611","rads", bandwidth);
+    	// rtc.renegotiate(vmrInfoData.confNode, "meet.KNW_3344556611","rads", bandwidth);
     // rtc.renegotiate("Join+Conference");
     
-    rtc.renegotiate();
+	rtc.renegotiate();
 }
 
 function initialise(confnode, conf, userbw, username, userpin, req_source, flash_obj) {
@@ -714,39 +711,49 @@ function disconnect(){
         window.location.href =  '/videovisitproviderpexip/myMeetings.htm';
         window.location.href =  '/videovisit/myMeetings.htm';
     } else{
-        window.location.href = '/videovisitmemberpexip/landingready.htm';
+    	window.location.href = '/videovisitmemberpexip/landingready.htm';
         window.location.href = '/videovisit/landingready.htm';
     }*/
 }
 
 /* -------------------- Tensor Flow Blur Bck - START -------------------- */
-function loadBodyPix() {
-  var options = {
-    architecture: 'MobileNetV1',
-    multiplier: 1.0,
-    stride: 8,
-    quantBytes: 4
-  }
-  bodyPix.load(options)
-    .then(net => perform(net))
-    .catch(err => console.log(err))
+/*function loadBodyPix() {
+    console.log("webui - loadBodyPix");
+    var options = {
+        multiplier: 0.75,
+        stride: 32,
+        quantBytes: 4
+    }
+    bodyPix.load(options)
+        .then(net => perform(net))
+        .catch(err => console.log(err))
 }
 
 async function perform(net) {
     while (blurBtn.hidden) {
-        const segmentation = await net.segmentPerson(video);
-
-        const backgroundBlurAmount = 3;
+        const backgroundBlurAmount = 6;
         const edgeBlurAmount = 2;
         const flipHorizontal = true;
 
         if (selected_background == 'bokeh') {
-          console.log("Bokeh effect");
+            console.log("Bokeh effect");
+            const segmentation = await net.segmentPerson(selfvideo);
             bodyPix.drawBokehEffect(
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
         } else{
-            drawBody(segmentation);
+            net.segmentPerson(selfvideo,  {
+                flipHorizontal: true,
+                internalResolution: 'medium',
+                segmentationThreshold: 0.5
+              })
+              .then(personSegmentation => {
+                if(personSegmentation!=null){
+                    drawBody(personSegmentation);
+                }
+            });
+            // cameraFrame = requestAnimFrame(detectBody);
+            // drawBody(segmentation);
         }
     }
 }
@@ -770,5 +777,5 @@ function parse(str) {
         i = 0;
 
     return str.replace(/%s/g, () => args[i++]);
-}
+}*/
 /* -------------------- Tensor Flow Blur Bck - END -------------------- */
