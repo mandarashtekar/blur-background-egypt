@@ -6,6 +6,7 @@
 
 'use strict';
 
+var isHost = false;
 var selected_background;
 
 window.onload = () => {
@@ -24,6 +25,7 @@ $('input:radio[name="role"]').change(function() {
     if ($(this).val() == '2') {
         console.log("Host Role selected");
         pinentry.classList.remove("hidden");
+        isHost = true;
         $("#id_pin").focus();
     } else {
         console.log("Guest Role selected");
@@ -59,7 +61,7 @@ $("#join-conf").on("click", function(){
     var id_guest = document.getElementById('id_guest');
     var pin = $("#id_pin").val();
 
-    window.location.href = "videoconf.html?alias="+alias+"&name="+name+"&bandwidth="+bandwidth+"&source="+source+"&pin="+pin+"&selected_background="+selected_background;
+    window.location.href = "videoconf.html?alias="+alias+"&name="+name+"&bandwidth="+bandwidth+"&source="+source+"&pin="+pin+"&isHost="+isHost+"&selected_background="+selected_background;
 
     // initialise("vve-tpmg-lab.kp.org", alias, bandwidth, name, "", source);
 });
