@@ -3,6 +3,7 @@
 var backgroundElement = document.querySelector('#background-container');
 var selected_background;
 var isHost;
+var s;
 
 window.onload = function () {
 	console.log("window.onload");
@@ -23,7 +24,7 @@ window.onload = function () {
     selected_background = data.selected_background;
 
     if(selected_background != 'bokeh'){
-      var s = parse('url(./images/%s.jpg)', selected_background);
+      s = parse('url(./images/%s.jpg)', selected_background);
       // canvas.style.backgroundImage=s;
       backgroundElement.style.backgroundImage=s;
       backgroundElement.style.width=canvas.width;
@@ -272,7 +273,7 @@ async function perform(net) {
     }
 }
 
-function drawBody(personSegmentation) {
+/*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
@@ -285,8 +286,8 @@ function drawBody(personSegmentation) {
     }
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData,0,0);
-}
-/*function drawBody(personSegmentation) {
+}*/
+function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     var image = new Image();
     // image.setAttribute('crossOrigin', '');
@@ -296,6 +297,7 @@ function drawBody(personSegmentation) {
     ctx2.drawImage(image, 0, 0, 200, 150);
     ctx.drawImage(selfvideo, 0, 0, 200, 150);
 
+    let frame2 =  ctx2.getImageData(0, 0, 200, 150);
     let frame = ctx.getImageData(0, 0, 200, 150);
     let l = frame.data.length / 4;
 
@@ -311,7 +313,7 @@ function drawBody(personSegmentation) {
       }
     }
     ctx3.putImageData(frame, 0, 0);
-}*/
+}
 
 function parse(str) {
     var args = [].slice.call(arguments, 1),
