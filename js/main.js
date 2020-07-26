@@ -307,8 +307,8 @@ function drawBody(personSegmentation) {
     // image.crossOrigin = "Anonymous";
     image.src = "./images/sphinx.jpg";
     
-    ctx2.drawImage(image, 0, 0, 200, 150);
-    let frame2 =  ctx2.getImageData(0, 0, 200, 150);
+    ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+    let frame2 =  ctx2.getImageData(0, 0, selfvideo.width, selfvideo.height);
 
     ctx.drawImage(selfvideo, 0, 0, 200, 150);
     let frame = ctx.getImageData(0, 0, 200, 150);
