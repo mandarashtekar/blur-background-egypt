@@ -289,8 +289,8 @@ function drawBody(personSegmentation) {
           pixel[p+3] = 0;
       }
     }
-    ctx.imageSmoothingEnabled = true;
-    ctx.putImageData(imageData,0,0);
+    ctx5.imageSmoothingEnabled = true;
+    ctx5.putImageData(imageData,0,0);
 }
 
 /*function drawBody(personSegmentation) {
