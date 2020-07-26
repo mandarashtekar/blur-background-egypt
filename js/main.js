@@ -185,8 +185,8 @@ selfvideo.onplaying = () => {
 	console.log("videoElement playing");
   console.log("selfvideo.videoWidth: "+selfvideo.videoWidth+" selfvideo.videoHeight: "+selfvideo.videoHeight);
 
-  canvas.width = selfvideo.videoWidth;
-	canvas.height = selfvideo.videoHeight;
+  /*canvas.width = selfvideo.videoWidth;
+	canvas.height = selfvideo.videoHeight;*/
   /*backgroundElement.width = selfvideo.videoWidth;
   backgroundElement.height = selfvideo.videoHeight;*/
 };
@@ -272,7 +272,7 @@ async function perform(net) {
     }
 }
 
-/*function drawBody(personSegmentation) {
+function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
 
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
@@ -286,9 +286,9 @@ async function perform(net) {
     }
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData,0,0);
-}*/
+}
 
-function drawBody(personSegmentation) {
+/*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     var image = new Image();
     image.src = "./images/sphinx.jpg";
@@ -298,7 +298,7 @@ function drawBody(personSegmentation) {
       ctx.drawImage(image, 50, 10, 100, 30);
       // ctx.drawImage(image, 0, 0, 200, 150);
     }
-}
+}*/
 
 /*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
