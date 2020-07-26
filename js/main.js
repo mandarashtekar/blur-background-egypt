@@ -286,6 +286,10 @@ function drawBody(personSegmentation) {
     }
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData,0,0);
+
+    var image = new Image();
+    image.src = "./images/sphinx.jpg";
+    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
 }
 
 /*function drawBody(personSegmentation) {
