@@ -1042,7 +1042,7 @@ PexRTCCall.prototype.pcIceCandidate = function (evt) {
     } else if (self.pc.iceGatheringState == "complete") {
         if (self.state == 'ACTIVE') {
             self.state = 'CONNECTING';
-            self.parent.onLog("Finished gathering candidates", self.pc.localDescription.sdp);
+            // self.parent.onLog("Finished gathering candidates", self.pc.localDescription.sdp);
             if (self.ice_candidates.length == 0) {
                 self.parent.onLog("No ICE candidates were gathered.");
                 self.parent.error = "No ICE candidates were gathered.";
@@ -1083,7 +1083,7 @@ PexRTCCall.prototype.mutateOffer = function(description) {
     lines = self.sdpAddPLI(lines);
 
     var sdp = lines.join('\r\n');
-    self.parent.onLog("Mutated offer", sdp);
+    // self.parent.onLog("Mutated offer", sdp);
 
     return new SessionDescription({ 'type' : 'offer', 'sdp' : sdp });
 };
@@ -1114,7 +1114,7 @@ PexRTCCall.prototype.pcAddStream = function(streams) {
 PexRTCCall.prototype.pcOfferCreated = function(sdp) {
     var self = this;
 
-    self.parent.onLog("Created offer", sdp.sdp);
+    // self.parent.onLog("Created offer", sdp.sdp);
     self.pc.setLocalDescription(sdp,
                         function () { self.parent.onLog("Local description active"); },
                         function (err) {
@@ -1196,7 +1196,7 @@ PexRTCCall.prototype.processAnswer = function(e) {
         lines = self.sdpChangeBW(lines);
 
         var sdp = lines.join('\r\n');
-        self.parent.onLog("Mutated answer", sdp);
+        // self.parent.onLog("Mutated answer", sdp);
 
         if (self.safari_ver > 604) {
             self.pc.setRemoteDescription(new SessionDescription({ 'type' : 'answer', 'sdp' : sdp }))
