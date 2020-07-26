@@ -185,8 +185,8 @@ selfvideo.onplaying = () => {
 	console.log("videoElement playing");
   console.log("selfvideo.videoWidth: "+selfvideo.videoWidth+" selfvideo.videoHeight: "+selfvideo.videoHeight);
 
-  canvas3.width = selfvideo.videoWidth;
-	canvas3.height = selfvideo.videoHeight;
+  /*canvas3.width = selfvideo.videoWidth;
+	canvas3.height = selfvideo.videoHeight;*/
   /*backgroundElement.width = selfvideo.videoWidth;
   backgroundElement.height = selfvideo.videoHeight;*/
 };
@@ -272,8 +272,12 @@ async function perform(net) {
     }
 }
 
-/*function drawBody(personSegmentation) {
+function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
+
+    var image = new Image();
+    image.src = "./images/sphinx.jpg";
+    
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
@@ -285,18 +289,20 @@ async function perform(net) {
     }
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData,0,0);
-}*/
+    ctx.drawImage(image, 0, 0, 200, 150);
+}
 
-function drawBody(personSegmentation) {
+/*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     var image = new Image();
     image.src = "./images/sphinx.jpg";
 
     if(canvas.getContext){
-      ctx.drawImage(image, 0, 0, 200, 150);
       ctx.drawImage(selfvideo, 0, 0, 200, 150);
+      // ctx.drawImage(image, 50, 10, 100, 30);
+      ctx.drawImage(image, 0, 0, 200, 150);
     }
-}
+}*/
 
 /*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
