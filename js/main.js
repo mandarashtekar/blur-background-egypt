@@ -185,8 +185,8 @@ selfvideo.onplaying = () => {
 	console.log("videoElement playing");
   console.log("selfvideo.videoWidth: "+selfvideo.videoWidth+" selfvideo.videoHeight: "+selfvideo.videoHeight);
 
-  /*canvas.width = selfvideo.videoWidth;
-	canvas.height = selfvideo.videoHeight;*/
+  canvas.width = selfvideo.videoWidth;
+	canvas.height = selfvideo.videoHeight;
   /*backgroundElement.width = selfvideo.videoWidth;
   backgroundElement.height = selfvideo.videoHeight;*/
 };
