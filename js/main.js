@@ -280,7 +280,7 @@ function drawBody(personSegmentation) {
     image.src = "./images/sphinx.jpg";
     ctx1.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
 
-    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    ctx.drawImage(selfvideo, 50, 50, 200, 100);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
     for (var p = 0; p<pixel.length; p+=4)
