@@ -296,17 +296,6 @@ function drawBody(personSegmentation) {
       ctx.drawImage(selfvideo, 0, 0, 200, 150);
       ctx.drawImage(image, 50, 10, 100, 30);
     }
-    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
-    var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
-    var pixel = imageData.data;
-    for (var p = 0; p<pixel.length; p+=4)
-    {
-      if (personSegmentation.data[p/4] == 0) {
-          pixel[p+3] = 0;
-      }
-    }
-    ctx.imageSmoothingEnabled = true;
-    ctx.putImageData(imageData,0,0);
 }
 
 /*function drawBody(personSegmentation) {
