@@ -60,6 +60,7 @@ const videoElement = document.querySelector('video');
 // const selfvideo = document.getElementById('selfvideo');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const ctx1 = canvas.getContext('2d');
 
 const canvas2 = document.getElementById('canvas2');
 const ctx2 = canvas2.getContext('2d');
@@ -287,10 +288,11 @@ function drawBody(personSegmentation) {
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData,0,0);
 
-    var image = new Image();
+    ctx.drawImage(ctx, 0, 0, selfvideo.width, selfvideo.height);
+    
+    /*var image = new Image();
     image.src = "./images/sphinx.jpg";
-    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
-    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
 
     // ctx.globalAlpha = 0.5;
 }
