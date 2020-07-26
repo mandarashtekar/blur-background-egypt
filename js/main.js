@@ -185,8 +185,8 @@ selfvideo.onplaying = () => {
 	console.log("videoElement playing");
   console.log("selfvideo.videoWidth: "+selfvideo.videoWidth+" selfvideo.videoHeight: "+selfvideo.videoHeight);
 
-  /*canvas3.width = selfvideo.videoWidth;
-	canvas3.height = selfvideo.videoHeight;*/
+  canvas.width = selfvideo.videoWidth;
+	canvas.height = selfvideo.videoHeight;
   /*backgroundElement.width = selfvideo.videoWidth;
   backgroundElement.height = selfvideo.videoHeight;*/
 };
@@ -278,7 +278,7 @@ function drawBody(personSegmentation) {
     var image = new Image();
     image.src = "./images/sphinx.jpg";
     ctx.drawImage(image, 0, 0, 200, 150);
-    
+
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
