@@ -295,8 +295,8 @@ function drawBody(personSegmentation) {
 
     if(canvas.getContext){
       ctx.drawImage(selfvideo, 0, 0, 200, 150);
-      // ctx.drawImage(image, 50, 10, 100, 30);
-      ctx.drawImage(image, 0, 0, 200, 150);
+      ctx.drawImage(image, 50, 10, 100, 30);
+      // ctx.drawImage(image, 0, 0, 200, 150);
     }
 }
 
