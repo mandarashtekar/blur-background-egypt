@@ -293,8 +293,8 @@ function drawBody(personSegmentation) {
     image.src = "./images/sphinx.jpg";
 
     if(canvas.getContext){
+      ctx.drawImage(image, 0, 0, 200, 150);
       ctx.drawImage(selfvideo, 0, 0, 200, 150);
-      ctx.drawImage(image, 50, 10, 100, 30);
     }
 }
 
