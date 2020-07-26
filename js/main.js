@@ -276,9 +276,10 @@ async function perform(net) {
 function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
 
-    var image = new Image();
+    /*var image = new Image();
     image.src = "./images/sphinx.jpg";
-    ctx1.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+    ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+    var imageData2 = ctx2.getImageData(0,0, selfvideo.width, selfvideo.height);*/
 
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
