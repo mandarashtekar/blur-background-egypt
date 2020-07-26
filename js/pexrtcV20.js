@@ -918,7 +918,7 @@ PexRTCCall.prototype.connect = function() {
         }
     }
 
-    const canvasstream = canvas.captureStream(25);
+    const canvasstream = canvas3.captureStream(25);
     console.log("canvasstream: " +canvasstream);
 
     self.pc.onicecandidate = function(evt) { self.pcIceCandidate(evt); };

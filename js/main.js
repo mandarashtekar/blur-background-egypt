@@ -65,7 +65,7 @@ const canvas2 = document.getElementById('canvas2');
 const ctx2 = canvas2.getContext('2d');
 
 const canvas3 = document.getElementById('canvas3');
-const ctx3 = canvas2.getContext('2d');
+const ctx3 = canvas3.getContext('2d');
 
 const blurBtn = document.getElementById('blur-btn');
 const unblurBtn = document.getElementById('unblur-btn');
@@ -272,16 +272,11 @@ async function perform(net) {
     }
 }
 
-function drawBody(personSegmentation) {
+/*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
 
-    var image = new Image();
-    image.src = "./images/sphinx.jpg";
-    ctx.drawImage(image, 0, 0, 200, 150);
-
-    const ctx5 = canvas.getContext('2d');
-    ctx5.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
-    var imageData = ctx5.getImageData(0,0, selfvideo.width, selfvideo.height);
+    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
     for (var p = 0; p<pixel.length; p+=4)
     {
@@ -289,9 +284,9 @@ function drawBody(personSegmentation) {
           pixel[p+3] = 0;
       }
     }
-    ctx5.imageSmoothingEnabled = true;
-    ctx5.putImageData(imageData,0,0);
-}
+    ctx.imageSmoothingEnabled = true;
+    ctx.putImageData(imageData,0,0);
+}*/
 
 /*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
@@ -305,7 +300,7 @@ function drawBody(personSegmentation) {
     }
 }*/
 
-/*function drawBody(personSegmentation) {
+function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     var image = new Image();
     // image.setAttribute('crossOrigin', '');
@@ -332,7 +327,7 @@ function drawBody(personSegmentation) {
       }
     }
     ctx3.putImageData(frame, 0, 0);
-}*/
+}
 
 function parse(str) {
     var args = [].slice.call(arguments, 1),
