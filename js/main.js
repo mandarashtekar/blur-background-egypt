@@ -290,6 +290,8 @@ function drawBody(personSegmentation) {
     var image = new Image();
     image.src = "./images/sphinx.jpg";
     ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+
+    ctx.globalAlpha = 0.5;
 }
 
 /*function drawBody(personSegmentation) {
