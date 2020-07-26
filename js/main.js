@@ -276,10 +276,19 @@ async function perform(net) {
 function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
 
-    /*var image = new Image();
+    var image = new Image();
     image.src = "./images/sphinx.jpg";
-    ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
-    var imageData2 = ctx2.getImageData(0,0, selfvideo.width, selfvideo.height);*/
+    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+    var imageData2 = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
+    var pixel2 = imageData2.data;
+    for (var q = 0; q<pixel2.length; q+=4)
+    {
+      if (personSegmentation.data[q/4] == 0) {
+          pixel2[q+3] = 0;
+      }
+    }
+    ctx.imageSmoothingEnabled = true;
+    ctx.putImageData(imageData2,0,0);
 
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
