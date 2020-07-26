@@ -211,7 +211,7 @@ blurBtn.addEventListener('click', e => {
 	unblurBtn.hidden = false;
 
 	// videoElement.hidden = true;
-	// canvas.hidden = false;
+	canvas.hidden = false;
 
 	loadBodyPix();
 });
