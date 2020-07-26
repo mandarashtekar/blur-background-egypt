@@ -3,7 +3,6 @@
 var backgroundElement = document.querySelector('#background-container');
 var selected_background;
 var isHost;
-var s;
 
 window.onload = function () {
 	console.log("window.onload");
@@ -24,7 +23,7 @@ window.onload = function () {
     selected_background = data.selected_background;
 
     if(selected_background != 'bokeh'){
-      s = parse('url(./images/%s.jpg)', selected_background);
+      var s = parse('url(./images/%s.jpg)', selected_background);
       // canvas.style.backgroundImage=s;
       /*backgroundElement.style.backgroundImage=s;
       backgroundElement.style.width=canvas.width;*/
@@ -58,7 +57,7 @@ var configParams;*/
 /* -------------------- CallStats - END -------------------- */
 
 const videoElement = document.querySelector('video');
-const selfvideo = document.getElementById('selfvideo');
+// const selfvideo = document.getElementById('selfvideo');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
