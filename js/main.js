@@ -275,7 +275,7 @@ async function perform(net) {
 function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
 
-    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    // ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
     for (var p = 0; p<pixel.length; p+=4)
@@ -290,8 +290,9 @@ function drawBody(personSegmentation) {
     var image = new Image();
     image.src = "./images/sphinx.jpg";
     ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
 
-    ctx.globalAlpha = 0.5;
+    // ctx.globalAlpha = 0.5;
 }
 
 /*function drawBody(personSegmentation) {
