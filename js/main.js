@@ -288,7 +288,7 @@ function drawBody(personSegmentation) {
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData,0,0);
 
-    ctx.drawImage(ctx, 0, 0, selfvideo.width, selfvideo.height);
+    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     
     /*var image = new Image();
     image.src = "./images/sphinx.jpg";
