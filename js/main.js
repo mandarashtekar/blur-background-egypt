@@ -62,10 +62,10 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
 const canvas2 = document.getElementById('canvas2');
-const ctx2 = canvas.getContext('2d');
+const ctx2 = canvas2.getContext('2d');
 
 const canvas3 = document.getElementById('canvas3');
-const ctx3 = canvas.getContext('2d');
+const ctx3 = canvas2.getContext('2d');
 
 const blurBtn = document.getElementById('blur-btn');
 const unblurBtn = document.getElementById('unblur-btn');
@@ -279,8 +279,9 @@ function drawBody(personSegmentation) {
     image.src = "./images/sphinx.jpg";
     ctx.drawImage(image, 0, 0, 200, 150);
 
-    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
-    var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
+    const ctx5 = canvas.getContext('2d');
+    ctx5.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    var imageData = ctx5.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
     for (var p = 0; p<pixel.length; p+=4)
     {
