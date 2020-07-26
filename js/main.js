@@ -288,7 +288,7 @@ async function perform(net) {
     ctx.putImageData(imageData,0,0);
 }*/
 
-/*function drawBody(personSegmentation) {
+function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     var image = new Image();
     image.src = "./images/sphinx.jpg";
@@ -298,9 +298,9 @@ async function perform(net) {
       // ctx.drawImage(image, 50, 10, 100, 30);
       ctx.drawImage(image, 0, 0, 200, 150);
     }
-}*/
+}
 
-function drawBody(personSegmentation) {
+/*function drawBody(personSegmentation) {
     console.log("Virtual Background effect");
     var image = new Image();
     // image.setAttribute('crossOrigin', '');
@@ -327,7 +327,7 @@ function drawBody(personSegmentation) {
       }
     }
     ctx3.putImageData(frame, 0, 0);
-}
+}*/
 
 function parse(str) {
     var args = [].slice.call(arguments, 1),
