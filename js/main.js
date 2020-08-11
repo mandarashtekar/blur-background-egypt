@@ -279,6 +279,7 @@ function drawBody(personSegmentation) {
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
     var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
+    console.log("pixel.length: "+ pixel.length);
     for (var p = 0; p<pixel.length; p+=4)
     {
       if (personSegmentation.data[p/4] == 0) {
