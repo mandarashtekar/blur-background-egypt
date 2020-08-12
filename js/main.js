@@ -263,7 +263,30 @@ async function perform(net) {
             ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
 
             drawBody(segmentation);
-        }
+        } /*else{
+            var image = new Image();
+            image.src = "./images/sphinx.jpg";
+
+            const maskBackground = true;
+            // Convert the personSegmentation into a mask to darken the background.
+            // const backgroundColor = {r: 0, g: 0, b: 0, a: 255};
+            const backgroundColor = {r: 255, g: 0, b: 0, a: 1};
+            const backgroundDarkeningMask = bodyPix.toMask(segmentation, maskBackground, backgroundColor);
+
+            const opacity = 0.7;
+            const maskBlurAmount = 3;
+            const flipHorizontal = true;
+
+            bodyPix.drawMask(canvas, selfvideo, backgroundDarkeningMask, opacity, maskBlurAmount, flipHorizontal);
+        }*/ /*else{
+            var image = new Image();
+            image.src = "./images/sphinx.jpg";
+
+            const foreground = {r: 255, g: 0, b: 0, a: 1};
+            const background = image;
+
+            bodyPix.toMask(segmentation, foreground, background);
+        }*/
         /*else{
             net.segmentPerson(selfvideo,  {
                 flipHorizontal: false,
