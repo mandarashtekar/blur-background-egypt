@@ -260,7 +260,7 @@ async function perform(net) {
         } else{
             var image = new Image();
             image.src = "./images/sphinx.jpg";
-            ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+            ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
 
             drawBody(segmentation);
         } /*else{
@@ -318,7 +318,7 @@ function drawBody(personSegmentation) {
       }
     }
     ctx.imageSmoothingEnabled = true;
-    ctx.putImageData(imageData, 0, 0);
+    ctx2.putImageData(imageData, 80, 80);
     // ctx.globalAlpha = 0.5;
 }
 
