@@ -245,18 +245,6 @@ function loadBodyPix() {
 }
 
 async function perform(net) {
-    /*var image = new Image();
-    image.src = "./images/sphinx.jpg";
-    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
-    
-    if (selected_background == 'bokeh') {
-      console.log("selected_background: bokeh");
-    } else{
-      var image = new Image();
-      image.src = "./images/sphinx.jpg";
-      ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
-    }
-    
     while (blurBtn.hidden) {
         const backgroundBlurAmount = 20;
         const edgeBlurAmount = 2;
@@ -270,9 +258,9 @@ async function perform(net) {
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
         } else{
-            /*var image = new Image();
+            var image = new Image();
             image.src = "./images/sphinx.jpg";
-            ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
+            ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
 
             drawBody(segmentation);
         } /*else{
