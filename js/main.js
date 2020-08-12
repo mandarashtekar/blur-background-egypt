@@ -232,7 +232,7 @@ function loadBodyPix() {
     console.log("main - loadBodyPix");
     var options = {
         multiplier: 0.75,
-        stride: 32,
+        stride: 16,
         quantBytes: 4
     }
     bodyPix.load(options)
@@ -241,10 +241,14 @@ function loadBodyPix() {
 }
 
 async function perform(net) {
+    /*var image = new Image();
+    image.src = "./images/sphinx.jpg";
+    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
+
     while (blurBtn.hidden) {
-        const backgroundBlurAmount = 6;
+        const backgroundBlurAmount = 20;
         const edgeBlurAmount = 2;
-        const flipHorizontal = true;
+        const flipHorizontal = false;
         const segmentation = await net.segmentPerson(selfvideo);
 
         if (selected_background == 'bokeh') {
@@ -254,6 +258,10 @@ async function perform(net) {
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
         } else{
+            var image = new Image();
+            image.src = "./images/sphinx.jpg";
+            ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+
             drawBody(segmentation);
         }
         /*else{
@@ -291,7 +299,7 @@ function drawBody(personSegmentation) {
 
     /*var image = new Image();
     image.src = "./images/sphinx.jpg";
-    ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
+    ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
     // ctx.globalAlpha = 0.5;
 }
 
