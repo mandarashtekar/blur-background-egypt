@@ -312,7 +312,7 @@ function drawBody(personSegmentation) {
     console.log("inside drawBody()");
 
     ctx.drawImage(selfvideo, 80, 80, selfvideo.width, selfvideo.height);
-    var imageData = ctx.getImageData(0,0, selfvideo.width, selfvideo.height);
+    var imageData = ctx.getImageData(80, 80, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
 
     for (var p = 0; p<pixel.length; p+=4)
@@ -322,7 +322,7 @@ function drawBody(personSegmentation) {
       }
     }
     ctx.imageSmoothingEnabled = true;
-    ctx.putImageData(imageData,50,50);
+    ctx.putImageData(imageData, 80, 80);
     // ctx.globalAlpha = 0.5;
 }
 
