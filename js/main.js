@@ -262,9 +262,9 @@ async function perform(net) {
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
         } else{
-            var image = new Image();
+            /*var image = new Image();
             image.src = "./images/sphinx.jpg";
-            ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+            ctx.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);*/
 
             drawBody(segmentation);
         } /*else{
@@ -311,8 +311,8 @@ async function perform(net) {
 function drawBody(personSegmentation) {
     console.log("inside drawBody()");
 
-    ctx.drawImage(selfvideo, 80, 80, selfvideo.width, selfvideo.height);
-    var imageData = ctx.getImageData(80, 80, selfvideo.width, selfvideo.height);
+    ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+    var imageData = ctx.getImageData(0, 0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
 
     for (var p = 0; p<pixel.length; p+=4)
@@ -322,7 +322,7 @@ function drawBody(personSegmentation) {
       }
     }
     ctx.imageSmoothingEnabled = true;
-    ctx.putImageData(imageData, 80, 80);
+    ctx.putImageData(imageData, 0, 0);
     // ctx.globalAlpha = 0.5;
 }
 
