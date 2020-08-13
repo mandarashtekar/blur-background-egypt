@@ -60,10 +60,11 @@ const videoElement = document.querySelector('video');
 // const selfvideo = document.getElementById('selfvideo');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-// const ctx1 = canvas.getContext('2d');
+console.log("canvas.width: " +canvas.width+ " canvas.height: " +canvas.height);
 
 const canvas2 = document.getElementById('canvas2');
 const ctx2 = canvas2.getContext('2d');
+console.log("canvas2.width: " +canvas2.width+ " canvas2.height: " +canvas2.height);
 
 const canvas3 = document.getElementById('canvas3');
 const ctx3 = canvas3.getContext('2d');
@@ -258,9 +259,15 @@ async function perform(net) {
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
         } else{
-            var image = new Image();
-            image.src = "./images/sphinx.jpg";
-            ctx2.drawImage(image, 0, 0, selfvideo.width, selfvideo.height);
+            var myImgElement = document.getElementById('foo');
+
+            canvas.width = myImgElement.width;
+            canvas.height = myImgElement.height;
+            ctx.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+
+            canvas2.width = myImgElement.width;
+            canvas2.height = myImgElement.height;
+            ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
 
             drawBody(segmentation);
         } /*else{
@@ -306,19 +313,30 @@ async function perform(net) {
 
 function drawBody(personSegmentation) {
     console.log("inside drawBody()");
+    console.log("selfvideo.width: " +selfvideo.width+ " selfvideo.height: " +selfvideo.height);
+    console.log("canvas.width: " +canvas.width+ " canvas.height: " +canvas.height);
+    console.log("canvas2.width: " +canvas2.width+ " canvas2.height: " +canvas2.height);
 
     ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+
     var imageData = ctx.getImageData(0, 0, selfvideo.width, selfvideo.height);
     var pixel = imageData.data;
+    
+    var imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+    var pixel2 = imageData2.data;
 
     for (var p = 0; p<pixel.length; p+=4)
     {
       if (personSegmentation.data[p/4] == 0) {
-          pixel[p+3] = 0;
+          // pixel[p+3] = 0;
+          pixel[p+0] = pixel2[p+0];
+          pixel[p+1] = pixel2[p+1];
+          pixel[p+2] = pixel2[p+2];
+          pixel[p+3] = 255;
       }
     }
     ctx.imageSmoothingEnabled = true;
-    ctx2.putImageData(imageData, 80, 80);
+    ctx.putImageData(imageData, 0, 0);
     // ctx.globalAlpha = 0.5;
 }
 
