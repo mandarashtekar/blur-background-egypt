@@ -247,9 +247,9 @@ function loadBodyPix() {
 
 async function perform(net) {
     while (blurBtn.hidden) {
-        const backgroundBlurAmount = 20;
+        const backgroundBlurAmount = 10;
         const edgeBlurAmount = 20;
-        const flipHorizontal = true;
+        const flipHorizontal = false;
         const segmentation = await net.segmentPerson(selfvideo);
 
         if (selected_background == 'bokeh') {
