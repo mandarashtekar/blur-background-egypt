@@ -248,7 +248,7 @@ function loadBodyPix() {
 async function perform(net) {
     while (blurBtn.hidden) {
         const backgroundBlurAmount = 20;
-        const edgeBlurAmount = 2;
+        const edgeBlurAmount = 20;
         const flipHorizontal = true;
         const segmentation = await net.segmentPerson(selfvideo);
 
