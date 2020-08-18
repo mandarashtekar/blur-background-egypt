@@ -197,20 +197,6 @@ selfvideo.onplaying = () => {
   backgroundElement.height = selfvideo.videoHeight;*/
 };
 
-/*  function startVideoStream() {
-navigator.mediaDevices.getUserMedia({video: true, audio: false})
-  .then(stream => {
-    videoElement.srcObject = stream;
-    videoElement.play();
-  })
-  .catch(err => {
-    startBtn.disabled = false;
-    blurBtn.disabled = true;
-    stopBtn.disabled = true;
-    alert(`Following error occured: ${err}`);
-  });
-}*/
-
 blurBtn.addEventListener('click', e => {
 	console.log("Blur button clicked");
 	blurBtn.hidden = true;
