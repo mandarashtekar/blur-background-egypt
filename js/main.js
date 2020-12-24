@@ -245,7 +245,7 @@ async function perform(net) {
             bodyPix.drawBokehEffect(
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
-        }/* else{
+        } else{
             var myImgElement = document.getElementById('foo');
 
             canvas.width = myImgElement.width;
@@ -257,7 +257,7 @@ async function perform(net) {
             ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
 
             drawBody(segmentation);
-        }*/ else{
+        }/* else{
             var image = new Image();
             image.src = "./images/sphinx.jpg";
 
@@ -272,7 +272,7 @@ async function perform(net) {
             const flipHorizontal = true;
 
             bodyPix.drawMask(canvas, selfvideo, backgroundDarkeningMask, opacity, maskBlurAmount, flipHorizontal);
-        } /*else{
+        }*/ /*else{
             var image = new Image();
             image.src = "./images/sphinx.jpg";
 
@@ -312,7 +312,7 @@ function drawBody(personSegmentation) {
     var imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
     var pixel2 = imageData2.data;
 
-    for (var p = 0; p<pixel.length; p+=4)
+    /*for (var p = 0; p<pixel.length; p+=4)
     {
       if (personSegmentation.data[p/4] == 0) {
           // pixel[p+3] = 0;
@@ -321,7 +321,7 @@ function drawBody(personSegmentation) {
           pixel[p+2] = pixel2[p+2];
           pixel[p+3] = 255;
       }
-    }
+    }*/
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData, 0, 0);
     // ctx.globalAlpha = 0.5;
