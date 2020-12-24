@@ -237,7 +237,6 @@ async function perform(net) {
         const edgeBlurAmount = 20;
         const flipHorizontal = false;
         const segmentation = await net.segmentPerson(selfvideo);
-        // const segmentation = await net.estimatePersonSegmentation(selfvideo);
 
         if (selected_background == 'bokeh') {
             console.log("Bokeh effect");
@@ -257,7 +256,7 @@ async function perform(net) {
             ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
 
             drawBody(segmentation);
-        }/* else{
+        } /*else{
             var image = new Image();
             image.src = "./images/sphinx.jpg";
 
