@@ -235,8 +235,9 @@ async function perform(net) {
     while (blurBtn.hidden) {
         const backgroundBlurAmount = 10;
         const edgeBlurAmount = 20;
-        const flipHorizontal = false;
-        const segmentation = await net.segmentPerson(selfvideo);
+        const flipHorizontal = true;
+        // const segmentation = await net.segmentPerson(selfvideo);
+        const segmentation = await net.estimatePersonSegmentation(selfvideo);
 
         if (selected_background == 'bokeh') {
             console.log("Bokeh effect");
@@ -244,7 +245,7 @@ async function perform(net) {
             bodyPix.drawBokehEffect(
               canvas, selfvideo, segmentation, backgroundBlurAmount,
               edgeBlurAmount, flipHorizontal);
-        } /*else{
+        }/* else{
             var myImgElement = document.getElementById('foo');
 
             canvas.width = myImgElement.width;
@@ -256,8 +257,7 @@ async function perform(net) {
             ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
 
             drawBody(segmentation);
-        } */
-        else{
+        }*/ else{
             var image = new Image();
             image.src = "./images/sphinx.jpg";
 
