@@ -312,16 +312,16 @@ function drawBody(personSegmentation) {
     var imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
     var pixel2 = imageData2.data;
 
-    /*for (var p = 0; p<pixel.length; p+=4)
+    for (var p = 0; p<pixel.length; p+=4)
     {
       if (personSegmentation.data[p/4] == 0) {
-          // pixel[p+3] = 0;
-          pixel[p+0] = pixel2[p+0];
-          pixel[p+1] = pixel2[p+1];
-          pixel[p+2] = pixel2[p+2];
-          pixel[p+3] = 255;
+          pixel[p+3] = 0;
+          // pixel[p+0] = pixel2[p+0];
+          // pixel[p+1] = pixel2[p+1];
+          // pixel[p+2] = pixel2[p+2];
+          // pixel[p+3] = 255;
       }
-    }*/
+    }
     ctx.imageSmoothingEnabled = true;
     ctx.putImageData(imageData, 0, 0);
     // ctx.globalAlpha = 0.5;
