@@ -235,7 +235,7 @@ async function perform(net) {
     while (blurBtn.hidden) {
         const backgroundBlurAmount = 10;
         const edgeBlurAmount = 20;
-        const flipHorizontal = true;
+        const flipHorizontal = false;
         const segmentation = await net.segmentPerson(selfvideo);
         // const segmentation = await net.estimatePersonSegmentation(selfvideo);
 
@@ -315,11 +315,11 @@ function drawBody(personSegmentation) {
     for (var p = 0; p<pixel.length; p+=4)
     {
       if (personSegmentation.data[p/4] == 0) {
-          pixel[p+3] = 0;
-          // pixel[p+0] = pixel2[p+0];
-          // pixel[p+1] = pixel2[p+1];
-          // pixel[p+2] = pixel2[p+2];
-          // pixel[p+3] = 255;
+          // pixel[p+3] = 0;
+          pixel[p+0] = pixel2[p+0];
+          pixel[p+1] = pixel2[p+1];
+          pixel[p+2] = pixel2[p+2];
+          pixel[p+3] = 255;
       }
     }
     ctx.imageSmoothingEnabled = true;
