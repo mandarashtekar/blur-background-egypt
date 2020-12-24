@@ -236,8 +236,8 @@ async function perform(net) {
         const backgroundBlurAmount = 10;
         const edgeBlurAmount = 20;
         const flipHorizontal = true;
-        // const segmentation = await net.segmentPerson(selfvideo);
-        const segmentation = await net.estimatePersonSegmentation(selfvideo);
+        const segmentation = await net.segmentPerson(selfvideo);
+        // const segmentation = await net.estimatePersonSegmentation(selfvideo);
 
         if (selected_background == 'bokeh') {
             console.log("Bokeh effect");
