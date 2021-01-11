@@ -222,6 +222,7 @@ unblurBtn.addEventListener('click', e => {
 function loadBodyPix() {
     console.log("main - loadBodyPix");
     var options = {
+        architecture: 'ResNet50',
         multiplier: 0.75,
         stride: 16,
         quantBytes: 4
