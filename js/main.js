@@ -205,7 +205,12 @@ blurBtn.addEventListener('click', e => {
 	// videoElement.hidden = true;
 	canvas.hidden = false;
 
-	loadBodyPix();
+  if (selected_background == 'bokeh') {
+    console.log("Bokeh effect");
+    loadBodyPix();
+  } else{
+    loadBodyPix();
+  }
 });
 
 unblurBtn.addEventListener('click', e => {
@@ -376,6 +381,129 @@ function parse(str) {
     return str.replace(/%s/g, () => args[i++]);
 }
 /* -------------------- Tensor Flow Blur Bck - END -------------------- */
+
+
+/* -------------------- Tensor Flow Virtual Bck I - START -------------------- */
+
+function loadBodyPix2() {
+  console.log("main - loadBodyPix");
+  var options = {
+      multiplier: 0.75,
+      stride: 16,
+      quantBytes: 4
+  }
+  bodyPix.load(options)
+      .then(net => perform2(net))
+      .catch(err => console.log(err))
+}
+
+async function perform2(net) {
+  while (blurBtn.hidden) {
+      const backgroundBlurAmount = 10;
+      const edgeBlurAmount = 20;
+      const flipHorizontal = false;
+
+      const segmentation = await net.segmentPerson(selfvideo);
+
+      var myImgElement = document.getElementById('foo');
+
+      canvas.width = myImgElement.width;
+      canvas.height = myImgElement.height;
+      ctx.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+
+      canvas2.width = myImgElement.width;
+      canvas2.height = myImgElement.height;
+      ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+
+      drawBody2(segmentation);
+  }
+}
+
+function drawBody2(personSegmentation) {
+  console.log("inside drawBody()");
+  console.log("selfvideo.width: " +selfvideo.width+ " selfvideo.height: " +selfvideo.height);
+  console.log("canvas.width: " +canvas.width+ " canvas.height: " +canvas.height);
+  console.log("canvas2.width: " +canvas2.width+ " canvas2.height: " +canvas2.height);
+
+  ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+
+  var imageData = ctx.getImageData(0, 0, selfvideo.width, selfvideo.height);
+  var pixel = imageData.data;
+  
+  var imageData2 = ctx2.getImageData(0, 0, canvas2.width, canvas2.height);
+  var pixel2 = imageData2.data;
+
+  for (var p = 0; p<pixel.length; p+=4)
+  {
+    if (personSegmentation.data[p/4] == 0) {
+        // pixel[p+3] = 0;
+        pixel[p+0] = pixel2[p+0];
+        pixel[p+1] = pixel2[p+1];
+        pixel[p+2] = pixel2[p+2];
+        pixel[p+3] = 255;
+    }
+  }
+  ctx.imageSmoothingEnabled = true;
+  ctx.putImageData(imageData, 0, 0);
+  // ctx.globalAlpha = 0.5;
+}
+
+/* -------------------- Tensor Flow Virtual Bck I - END -------------------- */
+
+
+/* -------------------- Tensor Flow Virtual Bck II - START -------------------- */
+function loadBodyPixNew(){
+    console.log("Inside Virtual Background");
+    var options = {
+      multiplier: 0.75,
+      stride: 16,
+      quantBytes: 4
+    }
+    bodyPix.load(options)
+        .then(net => performNew(net))
+        .catch(err => console.log(err))
+}
+
+async function performNew(net) {
+  console.log("Inside performNew");
+  while (blurBtn.hidden) {
+      const backgroundBlurAmount = 10;
+      const edgeBlurAmount = 20;
+      const flipHorizontal = false;
+
+      const outputStride = 16;
+      const segmentationThreshold = 0.5;
+      const personSegmentation = await net.estimatePersonSegmentation(selfvideo, outputStride, segmentationThreshold);
+
+      console.log("personSegmentation: ",personSegmentation);
+
+      const maskBackground = true;
+      
+      // Convert the personSegmentation into a mask to darken the background.
+      const backgroundDarkeningMask = bodyPix.toMaskImageData(personSegmentation, maskBackground);
+
+      const opacity = 0.7;
+
+      // draw the mask onto the image on a canvas.  With opacity set to 0.7 this will darken the background.
+      bodyPix.drawMask(
+        canvas, imageElement, backgroundDarkeningMask, opacity);
+
+
+      // var myImgElement = document.getElementById('foo');
+
+      // canvas.width = myImgElement.width;
+      // canvas.height = myImgElement.height;
+      // ctx.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+
+      // canvas2.width = myImgElement.width;
+      // canvas2.height = myImgElement.height;
+      // ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+
+      // drawBodyNew(segmentation);
+  }
+}
+/* -------------------- Tensor Flow Virtual Bck II - END -------------------- */
+
 
 
 
