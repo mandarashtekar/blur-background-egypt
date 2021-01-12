@@ -223,7 +223,7 @@ unblurBtn.addEventListener('click', e => {
 });
 
 
-/* -------------------- Tensor Flow Blur Bck - START -------------------- */
+/* -------------------- Tensor Flow Blur Bck & Virtual Back I - START -------------------- */
 function loadBodyPix() {
     console.log("main - loadBodyPix");
     var options = {
@@ -380,10 +380,10 @@ function parse(str) {
 
     return str.replace(/%s/g, () => args[i++]);
 }
-/* -------------------- Tensor Flow Blur Bck - END -------------------- */
+/* -------------------- Tensor Flow Blur Bck & Virtual Back I- END -------------------- */
 
 
-/* -------------------- Tensor Flow Virtual Bck I - START -------------------- */
+/* -------------------- Tensor Flow Virtual Bck II - START -------------------- */
 
 function loadBodyPix2() {
   console.log("main - loadBodyPix");
@@ -409,11 +409,11 @@ async function perform2(net) {
 
       canvas.width = myImgElement.width;
       canvas.height = myImgElement.height;
-      ctx.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+      // ctx.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
 
       canvas2.width = myImgElement.width;
       canvas2.height = myImgElement.height;
-      ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
+      // ctx2.drawImage(myImgElement, 0, 0, canvas.width, canvas.height);
 
       drawBody2(segmentation);
   }
@@ -424,8 +424,9 @@ function drawBody2(personSegmentation) {
   console.log("selfvideo.width: " +selfvideo.width+ " selfvideo.height: " +selfvideo.height);
   console.log("canvas.width: " +canvas.width+ " canvas.height: " +canvas.height);
   console.log("canvas2.width: " +canvas2.width+ " canvas2.height: " +canvas2.height);
-
-  ctx.drawImage(selfvideo, 0, 0, selfvideo.width, selfvideo.height);
+  
+  ctx.drawImage(myImgElement, 0, 0);
+  ctx.drawImage(selfvideo, 10, 10, selfvideo.width, selfvideo.height);
 
   var imageData = ctx.getImageData(0, 0, selfvideo.width, selfvideo.height);
   var pixel = imageData.data;
@@ -448,10 +449,10 @@ function drawBody2(personSegmentation) {
   // ctx.globalAlpha = 0.5;
 }
 
-/* -------------------- Tensor Flow Virtual Bck I - END -------------------- */
+/* -------------------- Tensor Flow Virtual Bck II - END -------------------- */
 
 
-/* -------------------- Tensor Flow Virtual Bck II - START -------------------- */
+/* -------------------- Tensor Flow Virtual Bck III - START -------------------- */
 function loadBodyPixNew(){
     console.log("Inside Virtual Background");
     var options = {
@@ -502,7 +503,7 @@ async function performNew(net) {
       // drawBodyNew(segmentation);
   }
 }
-/* -------------------- Tensor Flow Virtual Bck II - END -------------------- */
+/* -------------------- Tensor Flow Virtual Bck III - END -------------------- */
 
 
 
